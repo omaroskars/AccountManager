@@ -40,7 +40,6 @@ public class UserController {
 
   @PostMapping()
   public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-    System.out.println(user.toString());
     User newUser = userRepository.save(user);
 
     return ResponseEntity.ok().body(newUser);

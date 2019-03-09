@@ -9,8 +9,9 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", unique = true, nullable = false)
+  private Long id;
 
   @Column(name = "first_name", nullable = false)
   private String firstName;
