@@ -1,6 +1,7 @@
 package com.account.manager.controller;
 
 import com.account.manager.repository.UserRepository;
+import com.account.manager.exception.NotFoundException;
 import com.account.manager.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class UserController {
 
   // Get user by id.
   @GetMapping(value = "{id}")
-  public ResponseEntity<User> getUser(@PathVariable Long id) throws Exception {
-    User user = userRepository.findById(id).orElseThrow(() -> new Exception("User not found on :: " + id));
+  public ResponseEntity<User> getUser(@PathVariable Long id) throws NotFoundException {
+    User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
 
     return ResponseEntity.ok().body(user);
 
