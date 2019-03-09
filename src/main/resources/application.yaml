@@ -1,0 +1,28 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  security:
+    user:
+      name: omar
+      password: esjan
+...
+  
+
+# spring.jpa.generate-ddl=true
+
+# spring.jpa.hibernate.ddl-auto=create
+
+# spring.security.user.name=omar
+# spring.security.user.password=esjan
+
+# security.oauth2.client.id=1851779394926927
+# security.oauth2.client.client-secret=0cdc1d62f53e2a1bff101547667a0f58
+# security.oauth2.client.access-token-uri=https://graph.facebook.com/oauth/access_token
+# security.oauth2.client.user-authorization-uri=https://www.facebook.com/dialog/oauth
+# security.oauth2.client.token-name=oauth_token
+# security.oauth2.client.authentication-scheme=query
+# security.oauth2.client.client-authentication-scheme=form
+# security.oauth2.resource.user-info-uri= https://graph.facebook.com/
