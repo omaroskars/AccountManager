@@ -7,6 +7,7 @@ import com.account.manager.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,14 @@ public class UserController {
       user.setLastName(newUser.getLastName());
       return ResponseEntity.ok().body(repository.save(user));
     }).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
+  }
+
+  @DeleteMapping(value = "/{id}")
+  public ResponseEntity<User> deleteUser(@PathVariable Long id) throws NotFoundException {
+    User user = repository.findById(id).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
+    repository.deleteById(id);
+
+    return ResponseEntity.ok().body(user);
   }
 
 }
