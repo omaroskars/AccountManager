@@ -23,34 +23,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/users")
 public class UserController {
   @Autowired
-  private UserRepository userRepository;
+  private UserRepository repository;
+
+  UserController(UserRepository repository) {
+    this.repository = repository;
+  }
 
   // Get all users
   @GetMapping()
   public List<User> getUsers() {
-    return userRepository.findAll();
+    return repository.findAll();
   }
 
   // Get user by id.
   @GetMapping(value = "/{id}")
   public ResponseEntity<User> getUser(@PathVariable Long id) throws NotFoundException {
-    User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
+    User user = repository.findById(id).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
 
     return ResponseEntity.ok().body(user);
   }
 
   @PostMapping()
   public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-    User newUser = userRepository.save(user);
+    User newUser = repository.save(user);
     return ResponseEntity.ok().body(newUser);
   }
 
   @PutMapping(value = "/{id}")
   public ResponseEntity<User> putUser(@PathVariable Long id, @RequestBody User newUser) throws NotFoundException {
-    return userRepository.findById(id).map(user -> {
+    return repository.findById(id).map(user -> {
       user.setFirstName(newUser.getFirstName());
       user.setLastName(newUser.getLastName());
-      return ResponseEntity.ok().body(userRepository.save(user));
+      return ResponseEntity.ok().body(repository.save(user));
     }).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
   }
 
