@@ -17,6 +17,7 @@ import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/users")
@@ -41,8 +42,16 @@ public class UserController {
   @PostMapping()
   public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
     User newUser = userRepository.save(user);
-
     return ResponseEntity.ok().body(newUser);
+  }
+
+  @PutMapping(value = "/{id}")
+  public ResponseEntity<User> putUser(@PathVariable Long id, @RequestBody User newUser) throws NotFoundException {
+    return userRepository.findById(id).map(user -> {
+      user.setFirstName(newUser.getFirstName());
+      user.setLastName(newUser.getLastName());
+      return ResponseEntity.ok().body(userRepository.save(user));
+    }).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
   }
 
 }
