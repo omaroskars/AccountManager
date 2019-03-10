@@ -1,8 +1,2 @@
 insert into users
-values(1, 'Omar', 'Oskarsson');
-insert into users
-values(2, 'Leifur', 'Arason');
-insert into users
-values(3, 'Þorsteinn', 'Gunnarsson');
-insert into users
-values(4, 'Hekla', 'Pétursdóttir');
+values(1, 1, '$2a$10$xBSvaHU.4XpItYxN.tnKDuxj1DpZwXt/mWc6jNHdJQPfa144HZmvC', 'ADMIN','admin');

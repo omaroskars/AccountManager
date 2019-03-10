@@ -1,15 +1,11 @@
 spring:
+  h2:
+    console:
+      enabled: true
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-
-  security:
-    user:
-      name: omar
-      password: esjan
-...
-  
 
 # spring.jpa.generate-ddl=true
 
