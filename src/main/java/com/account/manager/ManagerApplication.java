@@ -14,6 +14,6 @@ public class ManagerApplication extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable(); // No need for CSRF in this example
+		http.csrf().disable(); // disable for now
 	}
 }
