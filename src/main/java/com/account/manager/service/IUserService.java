@@ -16,4 +16,12 @@ public interface IUserService {
 
   // Creates a new user
   User createUser(User user);
+
+  // Edits an existing user
+  // Throws NotFoundException if the user does not exist
+  User editUser(int id, User data) throws NotFoundException;
+
+  // Deletes a user
+  // Throws NotFoundExeption if the user does not exist
+  User deleteUser(int id) throws NotFoundException;
 }

@@ -1,9 +1,6 @@
-package com.account.manager.controller;
+package com.account.manager.test.unit.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -22,16 +19,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import junit.framework.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 @DataJpaTest
-public class UserControllerTest {
+public class UserServiceTest {
   @Mock
   private UserRepository userRepository;
 
@@ -65,10 +57,61 @@ public class UserControllerTest {
 
   @Test()
   public void getUserById_shouldThrowNotFoundException_whenUserDoesNotExist() throws NotFoundException {
+    int id = 16;
     exception.expect(NotFoundException.class);
-    exception.expectMessage("User not found with id: 1");
+    exception.expectMessage("User not found with id: " + id);
 
-    service.getUserById(1);
+    service.getUserById(id);
   }
 
+  @Test
+  public void createUser_shouldCreateNewUser() {
+    int id = 6;
+    User newUser = new User(id, "Kalli", "Bjarni");
+
+    when(userRepository.save(newUser)).thenReturn(newUser);
+
+    assertEquals(newUser, service.createUser(newUser));
+  }
+
+  @Test
+  public void editUser_shouldEditAUser() throws NotFoundException {
+    int id = 4;
+    User userToEdit = new User(id, "Stina", "Bjarnadottir");
+    User newData = new User(id, "Stina", "Kristinsdottir");
+
+    when(userRepository.findById(id)).thenReturn(Optional.of(userToEdit));
+    when(userRepository.save(userToEdit)).thenReturn(newData);
+
+    assertEquals(newData, service.editUser(id, newData));
+  }
+
+  @Test
+  public void editUser_shouldThrowNotFoundException() throws NotFoundException {
+    int id = 16;
+    User userData = new User(id, "Omar", "Oskarsson");
+    exception.expect(NotFoundException.class);
+    exception.expectMessage("User not found with id:");
+
+    service.editUser(id, userData);
+  }
+
+  @Test
+  public void deleteUser_shouldDeleteUser() throws NotFoundException {
+    int id = 6;
+    User userToDelete = new User(1, "Omar", "Oskarsson");
+
+    when(userRepository.findById(id)).thenReturn(Optional.of(userToDelete));
+
+    assertEquals(userToDelete, service.deleteUser(id));
+  }
+
+  @Test
+  public void deleteUser_shouldThrowExceptionNotFound() throws NotFoundException {
+    int id = 16;
+    exception.expect(NotFoundException.class);
+    exception.expectMessage("User not found with id: " + id);
+
+    service.deleteUser(id);
+  }
 }
