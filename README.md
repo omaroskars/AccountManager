@@ -13,7 +13,7 @@ then navigate to `http://localhost:8080/swagger-ui.html`
 
 #### Issues
 Spring security was giving me some troubles regarding CSRF tokens.
-To test/extend POST and PUT methods you need to CSRF.
+To test/extend POST and PUT methods you need to disable CSRF.
 
 in ManagerApplication.java disable CSRF:
 ```
