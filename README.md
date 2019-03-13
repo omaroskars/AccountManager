@@ -23,5 +23,5 @@ in ManagerApplication.java disable CSRF:
   }
 ```
 
-I have a WIP [pull request](https://github.com/omaroskars/AccountManager/pull/2)  implementing authentication/autorization with oauth.
+I have a WIP [pull request](https://github.com/omaroskars/AccountManager/pull/2)  implementing authentication/authorization with oauth.
 or checkout to the branch `git checkout feature/oauth`
