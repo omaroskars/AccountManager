@@ -4,8 +4,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
@@ -45,10 +43,11 @@ public class User {
   /**
    * ctor for tests
    */
-  public User(int id, String firstName, String lastName) {
+  public User(int id, String firstName, String lastName, String password) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.password = password;
   }
 
   /**

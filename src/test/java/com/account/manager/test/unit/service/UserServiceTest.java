@@ -36,9 +36,9 @@ public class UserServiceTest {
   @Test
   public void getAllUsers_shouldReturnAllUsers() {
     List<User> users = new ArrayList<User>();
-    users.add(new User(1, "Omar", "Oskarsson"));
-    users.add(new User(2, "Gummi", "Ben"));
-    users.add(new User(3, "Olafur", "Darri"));
+    users.add(new User(1, "Omar", "Oskarsson", "pw"));
+    users.add(new User(2, "Gummi", "Ben", "pw"));
+    users.add(new User(3, "Olafur", "Darri", "pw"));
 
     when(userRepository.findAll()).thenReturn(users);
 
@@ -48,7 +48,7 @@ public class UserServiceTest {
   @Test
   public void getUserById_shouldReturnUserWithCorrectId() throws NotFoundException {
     int id = 1;
-    User user = new User(id, "Omar", "Oskarsson");
+    User user = new User(id, "Omar", "Oskarsson", "pw");
 
     when(userRepository.findById(1)).thenReturn(Optional.of(user));
 
@@ -67,7 +67,7 @@ public class UserServiceTest {
   @Test
   public void createUser_shouldCreateNewUser() {
     int id = 6;
-    User newUser = new User(id, "Kalli", "Bjarni");
+    User newUser = new User(id, "Kalli", "Bjarni", "password");
 
     when(userRepository.save(newUser)).thenReturn(newUser);
 
@@ -77,8 +77,8 @@ public class UserServiceTest {
   @Test
   public void editUser_shouldEditAUser() throws NotFoundException {
     int id = 4;
-    User userToEdit = new User(id, "Stina", "Bjarnadottir");
-    User newData = new User(id, "Stina", "Kristinsdottir");
+    User userToEdit = new User(id, "Stina", "Bjarnadottir", "password");
+    User newData = new User(id, "Stina", "Kristinsdottir", "very secure password");
 
     when(userRepository.findById(id)).thenReturn(Optional.of(userToEdit));
     when(userRepository.save(userToEdit)).thenReturn(newData);
@@ -89,7 +89,7 @@ public class UserServiceTest {
   @Test
   public void editUser_shouldThrowNotFoundException() throws NotFoundException {
     int id = 16;
-    User userData = new User(id, "Omar", "Oskarsson");
+    User userData = new User(id, "Omar", "Oskarsson", "pw");
     exception.expect(NotFoundException.class);
     exception.expectMessage("User not found with id:");
 
@@ -99,7 +99,7 @@ public class UserServiceTest {
   @Test
   public void deleteUser_shouldDeleteUser() throws NotFoundException {
     int id = 6;
-    User userToDelete = new User(1, "Omar", "Oskarsson");
+    User userToDelete = new User(1, "Omar", "Oskarsson", "pw");
 
     when(userRepository.findById(id)).thenReturn(Optional.of(userToDelete));
 
