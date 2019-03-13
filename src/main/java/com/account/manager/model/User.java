@@ -34,7 +34,6 @@ public class User {
    * Password for the user
    */
   @Column(name = "password", nullable = false)
-  @JsonIgnore()
   private String password;
 
   /**
