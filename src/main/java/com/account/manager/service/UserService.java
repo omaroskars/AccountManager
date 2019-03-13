@@ -6,6 +6,7 @@ import com.account.manager.exception.NotFoundException;
 import com.account.manager.model.User;
 import com.account.manager.repository.UserRepository;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -25,6 +26,7 @@ public class UserService implements IUserService {
   }
 
   public User createUser(User user) {
+    user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
     return repository.save(user);
   }
 
@@ -32,6 +34,7 @@ public class UserService implements IUserService {
     return repository.findById(id).map(user -> {
       user.setFirstName(data.getFirstName());
       user.setLastName(data.getLastName());
+      user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
       return repository.save(user);
     }).orElseThrow(() -> new NotFoundException("User not found with id: " + id));
   }
