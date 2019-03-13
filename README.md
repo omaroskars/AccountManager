@@ -2,7 +2,7 @@
 Simple REST API written in Java spring for user accounts.
 
 Select your favourite IDE and start the application.
-I use VS code with Spring boot dashboard.
+I use VS Code with Spring boot dashboard extension.
 
 Login to see available resources
 ```
