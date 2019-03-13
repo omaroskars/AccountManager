@@ -1,5 +1,5 @@
 # AccountManager
-Simple REST API written in Java spring for user accounts.
+Simple REST API written in Java Spring for user accounts.
 
 Select your favourite IDE and start the application.
 I use VS Code with Spring boot dashboard extension.
@@ -23,5 +23,4 @@ in ManagerApplication.java disable CSRF:
   }
 ```
 
-I have a WIP [pull request](https://github.com/omaroskars/AccountManager/pull/2)  implementing authentication/authorization with oauth.
-or checkout to the branch `git checkout feature/oauth`
+I have a WIP [pull request](https://github.com/omaroskars/AccountManager/pull/2)  implementing authentication/authorization with oauth.You can also checkout to the branch ```git checkout feature/oauth```
