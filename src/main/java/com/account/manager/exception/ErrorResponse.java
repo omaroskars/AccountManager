@@ -2,6 +2,10 @@ package com.account.manager.exception;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * Error response for requests
+ * 
+ */
 public class ErrorResponse {
   private String message;
   private HttpStatus status;

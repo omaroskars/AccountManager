@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/**
+ * Controller for users
+ */
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -29,19 +32,25 @@ public class UserController {
   @Autowired
   private IUserService service;
 
-  // Returns a list of all users
+  /**
+   * Returns a list of all users
+   */
   @GetMapping()
   public List<User> getUsers() {
     return service.getAllUsers();
   }
 
-  // Get user by id.
+  /**
+   * Returns a user specified by id
+   */
   @GetMapping(value = "/{id}")
   public ResponseEntity<User> getUser(@PathVariable int id) throws NotFoundException {
     return ResponseEntity.ok().body(service.getUserById(id));
   }
 
-  // Creates a new user
+  /**
+   * Creates a new user
+   */
   @PostMapping()
   public ResponseEntity<User> createUser(@Valid @RequestBody User user) throws URISyntaxException {
     User newUser = service.createUser(user);
@@ -49,16 +58,19 @@ public class UserController {
     return ResponseEntity.created(location).body(user);
   }
 
-  // Edits an existing user
+  /**
+   * Edits an existing user
+   */
   @PutMapping(value = "/{id}")
   public ResponseEntity<User> putUser(@PathVariable int id, @RequestBody User data) throws NotFoundException {
     return ResponseEntity.ok().body(service.editUser(id, data));
   }
 
-  // Deletes a user
+  /**
+   * Deletes a user
+   */
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<User> deleteUser(@PathVariable int id) throws NotFoundException {
     return ResponseEntity.ok().body(service.deleteUser(id));
   }
-
 }
